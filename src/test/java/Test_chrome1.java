@@ -32,9 +32,9 @@ public class Test_chrome1 {
         String expected_link = "www.amazon.com";
         String expected_title = "Amazon.com: Online Shopping for Electronics, Apparel ...";
         String LinkInfo = driver.findElement(By.xpath(" (//div[@class='g']//cite)[1]")).getText();
-        assertThat(expected_link, Matchers.<String>equalTo(String.valueOf(LinkInfo)));
+        assertThat(expected_link, equalTo(LinkInfo));
         String TitleInfo = driver.findElement(By.xpath("(//div[@class='g']//h3)[1]")).getText();
-        assertThat(expected_title, Matchers.<String>equalTo(String.valueOf(TitleInfo)));
+        assertThat(expected_title,equalTo(TitleInfo));
         driver.close();
     }
 }
