@@ -19,22 +19,22 @@ public class Test_chrome1 {
         String path = System.getProperty("user.dir");
         System.out.println(path);
         System.setProperty("webdriver.chrome.driver", path + "\\resources\\chromedriver.exe");
-
         WebDriver driver = new ChromeDriver();
         driver.get("https://www.google.com");
         driver.manage().window().maximize();
-
         WebElement element = driver.findElement(By.name("q"));
         element.sendKeys("Amazon");
         element.submit();
         WebElement GoogleSheet = (new WebDriverWait(driver, 10)).until(ExpectedConditions.presenceOfElementLocated(By.id("result-stats")));
 
-        String expected_link = "www.amazon.com";
+/*        String expected_link = "www.amazon.com";
         String expected_title = "Amazon.com: Online Shopping for Electronics, Apparel ...";
         String LinkInfo = driver.findElement(By.xpath(" (//div[@class='g']//cite)[1]")).getText();
-        assertThat(expected_link, equalTo(LinkInfo));
-        String TitleInfo = driver.findElement(By.xpath("(//div[@class='g']//h3)[1]")).getText();
-        assertThat(expected_title,equalTo(TitleInfo));
+        assertThat(String["www.amazon.com"], equalTo(driver.findElement(By.xpath(" (//div[@class='g']//cite)[1]")).getText()));*/
+        assertThat((driver.findElement(By.xpath(" (//div[@class='g']//cite)[1]")).getText()), containsString("www.amazon.com"));
+/*        String TitleInfo = driver.findElement(By.xpath("(//div[@class='g']//h3)[1]")).getText();
+        assertThat(expected_title,equalTo(TitleInfo));*/
+        assertThat((driver.findElement(By.xpath("(//div[@class='g']//h3)[1]")).getText()), containsString("Amazon.com: Online Shopping for Electronics, Apparel ..."));
         driver.close();
     }
 }
