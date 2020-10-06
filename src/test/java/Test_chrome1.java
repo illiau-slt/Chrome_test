@@ -1,3 +1,4 @@
+import org.hamcrest.Matchers;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -18,21 +19,16 @@ public class Test_chrome1 {
         String path = System.getProperty("user.dir");
         System.out.println(path);
         System.setProperty("webdriver.chrome.driver", path + "\\resources\\chromedriver.exe");
-
         WebDriver driver = new ChromeDriver();
         driver.get("https://www.google.com");
         driver.manage().window().maximize();
-
         WebElement element = driver.findElement(By.name("q"));
         element.sendKeys("Amazon");
         element.submit();
         WebElement GoogleSheet = (new WebDriverWait(driver, 10)).until(ExpectedConditions.presenceOfElementLocated(By.id("result-stats")));
 
-        String expected_link = "https://www.amazon.com/";
-        String expected_title = "Amazon.com: Online Shopping for Electronics, Apparel ...";
-        Object text = driver.findElements(By.xpath("//div[@class='search'][1]"));
-        assertThat(expected_link, equalTo(text));
-        assertThat(expected_title, equalTo(text));
+        assertThat((driver.findElement(By.xpath(" (//div[@class='g']//cite)[1]")).getText()), containsString("www.amazon.com"));
+        assertThat((driver.findElement(By.xpath("(//div[@class='g']//h3)[1]")).getText()), containsString("Amazon.com: Online Shopping for Electronics, Apparel ..."));
         driver.close();
     }
 }
